@@ -1,3 +1,5 @@
+import { allFilmsQueryDocument } from "@/lib/graphql/queries/AllFilms";
+
 async function getData() {
   const res = await fetch(
     'https://swapi-graphql.netlify.app/.netlify/functions/index',
@@ -7,34 +9,10 @@ async function getData() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query: `
-      query Query {
-        allFilms {
-          films {
-            title
-            director
-            releaseDate
-            speciesConnection {
-              species {
-                name
-                classification
-                homeworld {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
-        `,
+        query: allFilmsQueryDocument
       }),
     }
   );
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data');
-  }
 
   return res.json();
 }
