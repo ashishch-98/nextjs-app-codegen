@@ -6,7 +6,10 @@ const config: CodegenConfig = {
   ignoreNoDocuments: true, // for better experience with the watcher
   generates: {
     './src/lib/graphql/generated/': {
-      preset: 'client'
+      preset: 'client',
+      config: {
+        documentMode: 'string'
+      }
     }
   }
 }
